@@ -16,7 +16,16 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  background-color: #61dafb;
+  background-color: hsla(193, 95%, 68%, 0.054);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  flex-direction: column;
+  top: 50px;
+  bottom: 0;
+  right: 0;
+  left: 0;
   /* 
   background-image: url("https://images.pexels.com/photos/209831/pexels-photo-209831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"); */
 }
@@ -91,5 +100,29 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.weather_input {
+  width: 300px;
+  height: 45px;
+  border-radius: 5px;
+  padding: 10px;
+  align-self:'center';
+}
+
+.weather_btn {
+  height: 50px;
+  /* transform: translateX(75%); */
+  color: '#fff';
+}
+
+.check_w_statz {
+  color: '#fff';
+  margin-bottom: 50px
+}
+@media(max-width: 400px){
+  .weather_input{
+    width: 200px;
   }
 }

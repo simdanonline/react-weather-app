@@ -24,18 +24,17 @@ const Home = () => {
 
     return (
 
-        <div className='we' >
-
-
-
-
-            <div className='containers' >
+            <div className='we' >
+                <p className='check_w_statz' style={{color: '#fff'}} > Check your weather status </p>
                 <div>
-                    <h1 style={{ color: '#D2D2C6', marginBottom: 50, }}> Check your weather status </h1>
-                    <input value={address} onChange={handleChange} style={{ marginRight: 10, width: 300, height: 45, borderRadius: 5, padding: 10 }} />
-                    <Button onClick={() => getWeather(address)} style={{ height: 50, color: '#343A40' }} > Check weather status </Button>
-
+                    <input value={address} onChange={handleChange} className='weather_input' />
                 </div>
+                    <br />
+                <Button onClick={() => {
+                    if(!address){
+                        return alert('Enter a location')
+                    }
+                    getWeather(address)}} className='weather_btn' > {state.isFetching ? 'Loading' : 'Check weather status'} </Button>
                 <div className='space' >
                     {state.weather && state.weather !== "Can't find location" && state.weather !== "Couldn't fetch response, try again" ?
                         <Alert color="success">
@@ -61,15 +60,6 @@ const Home = () => {
                 </div>
 
             </div>
-
-
-
-
-
-
-
-
-        </div>
     )
 }
 

@@ -29,18 +29,20 @@ const Navbarjs = (props) => {
     return (
 
 
-        <Navbar color="dark" dark expand="md">
-            <NavbarBrand href="/">Home</NavbarBrand>
-            <NavbarToggler onClick={toggle} />
-            <Collapse isOpen={isOpen} navbar>
-                <Nav className="mr-auto" navbar>
+        <div style={{height: '50px'}} >
+            <Navbar color="dark" dark expand="md">
+                <NavbarBrand href="/">Home</NavbarBrand>
+                <NavbarToggler onClick={toggle} />
+                <Collapse isOpen={isOpen} navbar>
+                    <Nav className="mr-auto" navbar>
 
 
-                </Nav>
-                <a href='https://github.com/simdanonline' target='blank' > <NavbarText>Github</NavbarText></a>
+                    </Nav>
+                    <a href='https://github.com/simdanonline' target='blank' > <NavbarText>Github</NavbarText></a>
 
-            </Collapse>
-        </Navbar>
+                </Collapse>
+            </Navbar>
+        </div>
 
 
 

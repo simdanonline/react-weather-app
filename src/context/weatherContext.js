@@ -30,14 +30,16 @@ const docReducer = (state = initialState, action) => {
                 todo: [...state.todo, action.payload]
             }
         case "weather":
-            return { weather: action.payload }
+            return {...state ,  weather: action.payload }
         case "ADD":
             return {
                 ...state,
                 names: [action.payload, ...state.names]
             }
         case "Remove":
-            return { names: state.names.filter(blogpost => blogpost.id !== action.payload) }
+            return { names: state.names.filter(blogpost => blogpost.id !== action.payload) };
+        case "FETCHING_WEATHER":
+            return {...state, isFetching: action.payload};
 
         default:
             return state;
@@ -127,6 +129,11 @@ const remove_item = (dispatch) => (id) => {
 
 
 const getWeather = (dispatch) => (address) => {
+
+    dispatch ({
+        type: "FETCHING_WEATHER",
+        payload: true
+    })
     const url = 'https://api.openweathermap.org/data/2.5/find?q=' + address + '&units=metric&appid=153963ec7b4420f8045f6c8510c911e1'
     axios({
         method: 'get',
@@ -138,15 +145,27 @@ const getWeather = (dispatch) => (address) => {
                     type: 'weather',
                     payload: "Can't find location"
                 })
+                dispatch ({
+                    type: "FETCHING_WEATHER",
+                    payload: false
+                })
             } else if (res.data.list.length !== 0) {
                 dispatch({
                     type: 'weather',
                     payload: 'The temperature in ' + res.data.list[0].name + ', ' + res.data.list[0].sys.country + ' is ' + res.data.list[0].main.temp + '°C' + ' and the humidity is ' + res.data.list[0].main.humidity + ' .The weather status is: ' + res.data.list[0].weather[0].main + ', ' + res.data.list[0].weather[0].description
                 })
+                dispatch ({
+                    type: "FETCHING_WEATHER",
+                    payload: false
+                })
             } else {
                 dispatch({
                     type: 'weather',
                     payload: "Couldn't fetch response, try again"
+                })
+                dispatch ({
+                    type: "FETCHING_WEATHER",
+                    payload: false
                 })
             }
         })
@@ -154,6 +173,10 @@ const getWeather = (dispatch) => (address) => {
             dispatch({
                 type: 'weather',
                 payload: "Couldn't fetch response, try again"
+            })
+            dispatch ({
+                type: "FETCHING_WEATHER",
+                payload: false
             })
         })
 }
